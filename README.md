@@ -506,7 +506,7 @@ PyArrow(18.0.0), Scikit-learn (1.4.0), NLTK (3.8.1), Radon 6.0.1.
 
 ## Publications
 
-- <b>The UDFBench Benchmark for General-purpose UDF Queries</b>, <br>
+- <b>The UDFBench Benchmark for General-purpose UDF Queries</b>, <b>VLDB 2025 Best Experiment Analysis & Benchmark Paper Award</b><br>
 Yannis Foufoulas, Theoni Palaiologou, and Alkis Simitsis. Proceedings of the VLDB Endowment, Vol. 18, No. 9 ISSN 2150-8097.
 - <b>UDFBench: A Tool for Benchmarking UDF Queries on SQL Engines</b>, <br>
 Yannis Foufoulas, Theoni Palaiologou, and Alkis Simitsis. In Companion of the 2025 International Conference on Management of Data, pp. 91-94. 2025.
