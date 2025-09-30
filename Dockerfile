@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
     git\
     maven \
     wget \
+    vim \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
