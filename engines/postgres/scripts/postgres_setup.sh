@@ -40,8 +40,15 @@ git branch
 make
 make install
 
+adduser postgres
+
 #Create the data directory
 mkdir $POSTPATH/data
+
+chown postgres $POSTPATH/data
+
+su -s /bin/bash -c '
+set -euo pipefail
 
 #Initialize a new database cluster
 $POSTPATH/bin/initdb -D $POSTPATH/data
@@ -62,3 +69,4 @@ $POSTPATH/bin/pg_ctl -D $POSTPATH/data -l logfile start
 
 # (Optional) Stop the server
 #$POSTPATH/bin/pg_ctl -D $POSTPATH/data -w stop
+' postgres
