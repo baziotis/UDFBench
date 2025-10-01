@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export CURRENT=$PWD
-export POSTPATH=$POSTGRESPATH
 
 # Check if the correct number of arguments is provided
 if [ "$#" -lt 2 ]; then

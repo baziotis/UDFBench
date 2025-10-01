@@ -1,5 +1,21 @@
 FROM postgres:17
 
+# Install development packages and PL/Python
 RUN apt-get update && apt-get install -y \
     postgresql-plpython3-17 \
+    postgresql-server-dev-17 \
+    build-essential \
+    make \
     && rm -rf /var/lib/apt/lists/*
+
+# Copy the C extension source code
+COPY engines/postgres/udfs/scalar/extractmonth_c/ /tmp/extractmonth_c/
+
+# Build and install the extension
+WORKDIR /tmp/extractmonth_c
+RUN make && make install
+
+# Clean up build artifacts
+RUN rm -rf /tmp/extractmonth_c
+
+WORKDIR /

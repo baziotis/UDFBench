@@ -51,7 +51,10 @@ fi
 
 
 export CURRENT=$PWD
-cd $POSTGRESUDFS/scalar/extractmonth_c;make; make install; cd $CURRENT;
+# THIS SHOULD NOT BE DONE HERE BECAUSE THIS IS EXECUTED INSIDE THE "app"
+# CONTAINER WHILE THIS NEEDS TO BE EXECUTED INSIDE THE Postgres CONTAINER. This
+# is handled by Dockerfile.pg
+# cd $POSTGRESUDFS/scalar/extractmonth_c;make; make install; cd $CURRENT;
 
 
 SQL_DIRS=("$POSTGRESUDFS/scalar" "$POSTGRESUDFS/aggregate" "$POSTGRESUDFS/table")

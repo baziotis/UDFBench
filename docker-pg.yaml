@@ -3,7 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.pg
-    image: postgres:17
+    image: pg-img
+    pull_policy: build  # Skip trying to pull, just build
     container_name: pg-cont
     environment:
       POSTGRES_USER: stef
