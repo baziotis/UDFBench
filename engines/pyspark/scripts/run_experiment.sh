@@ -78,12 +78,12 @@ for query_file in "${arr[@]}"; do
     repeats=2
   else
 
-    sudo sync; sudo sh -c 'echo 1 > /proc/sys/vm/drop_caches'
-    sudo sync; sudo sh -c 'echo 2 > /proc/sys/vm/drop_caches'
-    sudo sync; sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'
-    echo 3 | sudo  tee /proc/sys/vm/drop_caches
-    sudo swapoff -a
-    sudo swapon -a
+    sync; sh -c 'echo 1 > /proc/sys/vm/drop_caches'
+    sync; sh -c 'echo 2 > /proc/sys/vm/drop_caches'
+    sync; sh -c 'echo 3 > /proc/sys/vm/drop_caches'
+    echo 3 | tee /proc/sys/vm/drop_caches
+    swapoff -a
+    swapon -a
 
     repeats=1
   fi

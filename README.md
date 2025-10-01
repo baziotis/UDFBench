@@ -1,8 +1,5 @@
 This is a fork of [athenarc/UDFBench](https://github.com/athenarc/UDFBench). The goal of this fork is to provide Docker support for an easier setup.
 
-
-## Postgres
-
 First build the necessary containers:
 
 ```
@@ -15,7 +12,7 @@ Connect to the `app` container:
 docker compose -f docker-pg.yaml exec app bash
 ```
 
-First, deploy UDFBench:
+First, deploy UDFBench, e.g.:
 
 ```
 ./automations/deploy_udfbench.sh ssd yes yes yes postgres

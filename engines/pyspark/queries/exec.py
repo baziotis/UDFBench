@@ -82,7 +82,8 @@ def createfunctions(spark,UDFs,UDAFs,UDTFs):
         spark.udtf.register("file_q13", UDTFs["file_q13"].File_q13)
         spark.udtf.register("file_q18", UDTFs["file_q18"].File_q18)
         return True
-    except:
+    except Exception as e:
+        print(e)
         return False
 
 
@@ -208,7 +209,11 @@ if __name__ == "__main__":
             from pyspark_schema import schemas
 
             try:
-                spark = SparkSession.builder.appName("UDFBench").config("spark.jars", f"{UDFS_PATH}/scalar/extractday_scala/target/ScalaUDFjarfile.jar, {UDFS_PATH}/scalar/extractmonth_java/target/JavaUDFjarfile.jar").config("spark.driver.memory","58g").getOrCreate() 
+
+                spark = SparkSession.builder.appName("UDFBench") \
+                    .master("spark://spark:7077") \
+                    .config("spark.jars", "/jars/ScalaUDFjarfile.jar,/jars/JavaUDFjarfile.jar") \
+                    .config("spark.driver.memory","58g").getOrCreate()
 
   
                 load_parquet_files(spark,PARQUET_PATH,schemas)
