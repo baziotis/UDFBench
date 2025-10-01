@@ -1,5 +1,8 @@
 services:
   pg:
+    build:
+      context: .
+      dockerfile: Dockerfile.pg
     image: postgres:17
     container_name: pg-cont
     environment:
@@ -12,7 +15,9 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.app
     image: app-img
     pull_policy: build  # Skip trying to pull, just build
     container_name: app-cont
