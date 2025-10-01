@@ -44,5 +44,4 @@ elif [ $DISK = "mem" ]; then
 fi
 shift
 
-$PSQLPATH -U $PSQLUSER -p $PSQLPORT "$DATAB" < "$POSTGRESSCRIPTS"/postgres_schema.sql
-       
+$PSQLPATH -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT "$DATAB" < "$POSTGRESSCRIPTS"/postgres_schema.sql

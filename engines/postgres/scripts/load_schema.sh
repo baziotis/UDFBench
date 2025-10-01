@@ -59,12 +59,12 @@ SQL_DIRS=("$POSTGRESUDFS/scalar" "$POSTGRESUDFS/aggregate" "$POSTGRESUDFS/table"
 for dir in "${SQL_DIRS[@]}"; do
 
     for file in "$dir"/*.sql; do
-        $PSQLPATH -U "$PSQLUSER" -p "$PSQLPORT" "$DATAB" -f "$file"
+        $PSQLPATH -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT "$DATAB" -f "$file"
     done
 done
 
 sed -i.bak "s|[^']*\.csv'|"$DATASETPATH/csvs/$DATAB"/&|g" "$POSTGRESSCRIPTS"/postgres_load.sql;
 
-$PSQLPATH -U $PSQLUSER -p $PSQLPORT "$DATAB" -f "$POSTGRESSCRIPTS"/postgres_load.sql;
+$PSQLPATH -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT "$DATAB" -f "$POSTGRESSCRIPTS"/postgres_load.sql;
 
 mv "$POSTGRESSCRIPTS"/postgres_load.sql.bak "$POSTGRESSCRIPTS"/postgres_load.sql;

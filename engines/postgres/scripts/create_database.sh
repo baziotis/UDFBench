@@ -48,5 +48,5 @@ elif [ $DISK = "mem" ]; then
 fi
 shift
 
-$POSTPATH/bin/psql -U "$PSQLUSER" -p "$PSQLPORT" -d postgres  -tc "SELECT 1 FROM pg_database WHERE datname = '$DATAB'" | grep -q 1 ||  $POSTPATH/bin/createdb -U $PSQLUSER -p $PSQLPORT $DATAB
+$PSQLPATH -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT -d postgres  -tc "SELECT 1 FROM pg_database WHERE datname = '$DATAB'" | grep -q 1 || createdb -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT $DATAB
 

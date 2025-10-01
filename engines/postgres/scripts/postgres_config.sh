@@ -5,8 +5,11 @@ export POSTGRESUDFS=$PWD'/engines/postgres/udfs'
 export POSTGRESSCRIPTS=$PWD'/engines/postgres/scripts'
 #environment variables for set up,
 export POSTGRESPATH=$PWD'/databases/postgres'
-export PSQLPATH=$PWD'/databases/postgres/bin/psql'
-export PSQLSSDPORT="50007"
+export PSQLPATH=psql
+export PSQLSSDPORT="5432"
 export PSQLHDDPORT=""
 export PSQLMEMPORT=""
-export PSQLUSER=$USER
+export PSQLUSER="stef"
+# This should always be PGPASSWORD. This is the variable `psql` reads.
+export PGPASSWORD="stef"
+export PSQLHOST=pg

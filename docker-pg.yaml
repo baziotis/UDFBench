@@ -1,0 +1,32 @@
+services:
+  pg:
+    image: postgres:17
+    container_name: pg-cont
+    environment:
+      POSTGRES_USER: stef
+      POSTGRES_PASSWORD: stef
+      POSTGRES_DB: exp
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    image: app-img
+    pull_policy: build  # Skip trying to pull, just build
+    container_name: app-cont
+    depends_on:
+      - pg
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      - DB_HOST=pg
+      - DB_PORT=5432
+      - DB_NAME=exp
+      - DB_USER=stef
+      - DB_PASS=stef
+
+volumes:
+  pgdata:
