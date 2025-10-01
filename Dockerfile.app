@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY automations/requirements.txt .
 
-RUN pip install -r requirements.txt --upgrade --user
+RUN pip install -r requirements.txt
 
 WORKDIR /app
 

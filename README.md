@@ -24,5 +24,5 @@ First, deploy UDFBench:
 And then you can run experiments, e.g.:
 
 ```
-./automations/run_udfbench.sh postgres l t0 cold ssd false 2
+./automations/run_udfbench.sh postgres t t0 cold ssd false 2
 ```
