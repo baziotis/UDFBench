@@ -72,12 +72,12 @@ for query_file in "${arr[@]}"; do
     repeats=2
   else
 
-    sudo sync; sudo sh -c 'echo 1 > /proc/sys/vm/drop_caches'
-    sudo sync; sudo sh -c 'echo 2 > /proc/sys/vm/drop_caches'
-    sudo sync; sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'
-    echo 3 | sudo  tee /proc/sys/vm/drop_caches
-    sudo swapoff -a
-    sudo swapon -a
+    sync; sh -c 'echo 1 > /proc/sys/vm/drop_caches'
+    sync; sh -c 'echo 2 > /proc/sys/vm/drop_caches'
+    sync; sh -c 'echo 3 > /proc/sys/vm/drop_caches'
+    echo 3 | tee /proc/sys/vm/drop_caches
+    swapoff -a
+    swapon -a
 
     repeats=1
   fi
@@ -98,9 +98,9 @@ for query_file in "${arr[@]}"; do
     fi
     
     if [ $PNTHREADS -eq -1 ]; then
-        $PSQLPATH -U $PSQLUSER -p $PSQLPORT "$DATAB" -f "$query_file"  > "$POSTGRESRESULTSPATH/experiments/$filename".txt
+        $PSQLPATH -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT "$DATAB" -f "$query_file"  > "$POSTGRESRESULTSPATH/experiments/$filename".txt
     else
-        $PSQLPATH -U "$PSQLUSER" -p "$PSQLPORT" -d "$DATAB" -c "SET max_parallel_workers = $PNTHREADS; SET  max_parallel_workers_per_gather = $PNTHREADS;" -f "$query_file" > "$POSTGRESRESULTSPATH/experiments/$filename.txt"
+        $PSQLPATH -h $PSQLHOST -U "$PSQLUSER" -p "$PSQLPORT" -d "$DATAB" -c "SET max_parallel_workers = $PNTHREADS; SET  max_parallel_workers_per_gather = $PNTHREADS;" -f "$query_file" > "$POSTGRESRESULTSPATH/experiments/$filename.txt"
     fi
     
     if  [ $COLLECTL = "true" ]; then 
@@ -113,9 +113,9 @@ done
         collectl -p $POSTGRESRESULTSPATH/collectl/$filename*.gz -scdnm -P  > $POSTGRESRESULTSPATH/collectl/$filename.csv
     fi
     if [[ $query_number == '20' ]] && (( repeats % 2 != 0 )); then
-        $PSQLPATH -U $PSQLUSER -p $PSQLPORT "$DATAB" -f "$query_file" &>/dev/null
+        $PSQLPATH -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT "$DATAB" -f "$query_file" &>/dev/null
     elif [[ $query_number == '21' ]]; then
-        $PSQLPATH -U $PSQLUSER -p $PSQLPORT "$DATAB" -c "delete from projects_artifacts where provenance='crossref'" &>/dev/null
+        $PSQLPATH -h $PSQLHOST -U $PSQLUSER -p $PSQLPORT "$DATAB" -c "delete from projects_artifacts where provenance='crossref'" &>/dev/null
     fi
    
 done

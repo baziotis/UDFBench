@@ -22,6 +22,7 @@ services:
     image: app-img
     pull_policy: build  # Skip trying to pull, just build
     container_name: app-cont
+    privileged: true # Needed to drop the caches in run_experiment.sh
     depends_on:
       - pg
     volumes:
