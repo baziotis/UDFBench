@@ -6,7 +6,7 @@ This is a fork of [athenarc/UDFBench](https://github.com/athenarc/UDFBench). The
 First build the necessary containers:
 
 ```
-docker compose -f docker-pg.yaml exec app bash
+docker compose -f docker-pg.yaml up -d
 ```
 
 Connect to the `app` container:
