@@ -1,0 +1,25 @@
+FROM apache/spark:3.5.5-java17-scala
+
+RUN apt-get update && apt-get install -y \
+	  maven \
+    && rm -rf /var/lib/apt/lists/*
+
+# Build extension
+
+COPY engines/pyspark/udfs/scalar/extractmonth_java/ /tmp/extractmonth_java/
+WORKDIR /tmp/extractmonth_java
+RUN mvn clean && mvn clean package
+
+COPY engines/pyspark/udfs/scalar/extractday_scala/ /tmp/extractday_scala/
+WORKDIR /tmp/extractday_scala
+RUN mvn clean && mvn clean package
+
+# Make jars available
+COPY /tmp/extractmonth_java/target/JavaUDFjarfile.jar /opt/spark/jars/
+COPY /tmp/extractday_scala/target/ScalaUDFjarfile.jar /opt/spark/jars/
+
+# Clean up build artifacts
+RUN rm -rf /tmp/extractmonth_java
+RUN rm -rf /tmp/extractday_scala
+
+WORKDIR /

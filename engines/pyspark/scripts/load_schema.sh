@@ -51,9 +51,9 @@ mkdir -p  "$PARQUETPATH";
 
 cp -r "$DATASETPATH/parquet/$DATAB" "$PARQUETPATH"/"$DATAB"/;
 
-export CURRENT=$PWD
-cd $PYSPARKUDFS/scalar/extractmonth_java; mvn clean; mvn clean package; cd $CURRENT;
+# export CURRENT=$PWD
+# cd $PYSPARKUDFS/scalar/extractmonth_java; mvn clean; mvn clean package; cd $CURRENT;
 
-cd $PYSPARKUDFS/scalar/extractday_scala; mvn clean; mvn clean package; cd $CURRENT;
+# cd $PYSPARKUDFS/scalar/extractday_scala; mvn clean; mvn clean package; cd $CURRENT;
 
 

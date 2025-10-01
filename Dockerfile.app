@@ -1,8 +1,15 @@
 # Dockerfile
 FROM python:3.10
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
-    postgresql-client wget curl vim \
+    postgresql-client \
+    wget \
+    curl \
+    vim \
+	collectl \
+    time \
     && rm -rf /var/lib/apt/lists/*
 
 COPY automations/requirements.txt .

@@ -1,6 +1,5 @@
 FROM postgres:17
 
-# Install development packages and PL/Python
 RUN apt-get update && apt-get install -y \
     postgresql-plpython3-17 \
     postgresql-server-dev-17 \
