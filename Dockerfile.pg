@@ -1,11 +1,30 @@
 FROM postgres:17
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
     postgresql-plpython3-17 \
     postgresql-server-dev-17 \
     build-essential \
     make \
+    python3-pip \
+    python3-pandas \
+    python3-numpy \
+    python3-dateutil \
+    python3-sklearn \
+    python3-scipy \
+    python3-nltk \
+    python3-setuptools \
+    python3-wheel \
+    libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+    libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git \
     && rm -rf /var/lib/apt/lists/*
+
+# Install packages not available via apt (using compatible versions)
+RUN python3 -m pip install --break-system-packages pyarrow
+
+# --- Install extension
 
 # Copy the C extension source code
 COPY engines/postgres/udfs/scalar/extractmonth_c/ /tmp/extractmonth_c/
