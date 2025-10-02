@@ -15,27 +15,27 @@ services:
       - pgdata:/var/lib/postgresql/data
       - .:/app  # Mount project files so PL/Python can access dataset files
 
-  # spark:
-  #   image: apache/spark:3.5.5-scala2.12-java17-python3-r-ubuntu
-  #   container_name: spark-cont
-  #   hostname: spark-master
-  #   command: >
-  #     bash -c "
-  #     export SPARK_MASTER_HOST=spark-master &&
-  #     /opt/spark/sbin/start-master.sh &&
-  #     /opt/spark/sbin/start-worker.sh spark://spark-master:7077 &&
-  #     tail -f /opt/spark/logs/spark-*-org.apache.spark.deploy.master.Master-*.out
-  #     "
-  #   ports:
-  #     - "7077:7077"   # Spark master port
-  #     - "8080:8080"   # Spark master web UI
-  #     - "8081:8081"   # Spark worker web UI
-  #   volumes:
-  #     - .:/app        # Mount the project directory so Spark can access data files
-  #   environment:
-  #     - SPARK_WORKER_CORES=4
-  #     - SPARK_WORKER_MEMORY=60g
-  #     - SPARK_MASTER_HOST=spark-master
+  spark:
+    image: apache/spark:3.5.5-scala2.12-java17-python3-r-ubuntu
+    container_name: spark-cont
+    hostname: spark-master
+    command: >
+      bash -c "
+      export SPARK_MASTER_HOST=spark-master &&
+      /opt/spark/sbin/start-master.sh &&
+      /opt/spark/sbin/start-worker.sh spark://spark-master:7077 &&
+      tail -f /opt/spark/logs/spark-*-org.apache.spark.deploy.master.Master-*.out
+      "
+    ports:
+      - "7077:7077"   # Spark master port
+      - "8080:8080"   # Spark master web UI
+      - "8081:8081"   # Spark worker web UI
+    volumes:
+      - .:/app        # Mount the project directory so Spark can access data files
+    environment:
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=60g
+      - SPARK_MASTER_HOST=spark-master
 
   app:
     build:
