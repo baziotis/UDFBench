@@ -38,6 +38,9 @@ shift
                 "$DATASETSPATH"/csv_to_parquet.sh  "$DATASETSPATH"/csvs "$DATASETSPATH"/parquet $database $PYTHONEXEC
             done
             rm -r "$DATASETSPATH"/externalfiles
+            # Change the permissions so that other containers that don't run as root (e.g., postgres) can not only
+            # read it, but also write to it
+            chmod -R 777 "$DATASETSPATH"/files/
             ;;
         no)
             :
