@@ -13,6 +13,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - .:/app  # Mount project files so PL/Python can access dataset files
 
   # spark:
   #   image: apache/spark:3.5.5-scala2.12-java17-python3-r-ubuntu
